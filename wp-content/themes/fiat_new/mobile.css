@@ -1,0 +1,126 @@
+.is_mobile {
+    display: none;
+}
+
+.is_desktop {
+    display: block;
+}
+
+
+
+@media all and (max-height: 900px) {
+
+
+}
+
+@media all and (max-width: 1600px) {
+
+}
+
+
+@media all and (max-width: 1200px) {
+
+}
+
+
+
+@media all and (max-width: 960px) {
+    .is_mobile {
+        display: block;
+    }
+    .is_desktop {
+        display: none;
+    }
+  
+    .flex_no_wrap__d {
+        flex-wrap: wrap;
+    }
+
+
+    .car_filter .right {
+        max-width: 100%;
+        width: 100%;
+    }
+
+    .car_filter .left {
+        width: 100%;
+        max-width: 100%;
+    }
+    
+    .big_button {
+        margin-bottom: 50px;
+    }
+
+
+
+    .car_models::before, .car_models::after {
+        content: '';
+        position: absolute;
+        width: 170px;
+        height: 100%;
+        z-index: 9;
+        display: none;
+    }
+    .car_models::after {
+        left: 0;
+        top: 0;
+        background: transparent linear-gradient(270deg,#EAEAEA 0%, #FFFFFF00 100%) 0% 0% no-repeat padding-box;
+        transform: matrix(-1, 0, 0, -1, 0, 0);
+    }
+    .car_models::before {
+        right: 0;
+        background: transparent linear-gradient(270deg,#EAEAEA 0%, #FFFFFF00 100%) 0% 0% no-repeat padding-box;
+        opacity: 1;
+    }
+    .container {
+        padding: 0;
+    }
+    .car_filter .car_m {
+        text-align: center;
+        margin: 0 auto;
+    }
+    .big_slider .slick-list {
+        height: auto;
+    }
+    .slick-dots {
+        margin-top: 40px;
+    }
+
+
+    .car_features  {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    .car_features li {
+        width: 100%;
+        border: none;
+        text-align: center;
+    }
+
+    .blue_title {
+        font-size: 18px;
+    }
+    header {
+        height: 49px;
+    }
+    .logo {
+        width: 40px;
+    }
+    .head-logo {
+        margin-left: 0;
+        max-width: 100px;
+        margin-top: auto;
+    }
+
+
+}
+
+
+@media all and (max-width: 768px) {
+
+
+
+
+    
+
+}
