@@ -1,0 +1,749 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Hover Lead - Leads Management and Integrations</title>
+    <style>
+    body {
+        margin: 0px 10px;
+        padding: 0px;
+        font-family: Verdana, Geneva, sans-serif;
+        font-size: 14px;
+        color: #000;
+    }
+
+    #api_div {
+        text-align: left;
+        direction: ltr;
+        float: left;
+    }
+
+    #api_table {
+        direction: ltr;
+        text-align: left;
+    }
+
+    #api_table td {
+        border: 1px solid #ccc;
+        padding: 0px 10px;
+    }
+</style>
+</head>
+
+<body>
+
+    <div id="api_div">
+
+        <p>
+
+            <strong>
+
+                API:
+
+            </strong>
+
+            <br />
+
+            The details must be sent using the UTF-8 POST method to the following address:
+
+            <br />
+
+            https://hoverlead.com/lead/save
+
+            <br />
+
+        </p>
+
+        <table id="api_table" dir="rtl">
+
+            <thead>
+
+                <tr>
+
+                    <td width="197" valign="top">
+
+                        <p>
+
+                            <strong>
+
+                               Parameter
+
+                           </strong>
+
+                       </p>
+
+                   </td>
+
+                   <td width="662" valign="top">
+
+                    <p>
+
+                        <strong>
+
+                         Value
+
+                     </strong>
+
+                 </p>
+
+             </td>
+
+             <td width="197" valign="top">
+
+                <p>
+
+                    <strong>
+
+                        Comments
+
+                    </strong>
+
+                </p>
+
+            </td>
+
+        </tr>
+
+    </thead>
+
+    <tbody>
+
+        <tr>
+
+            <td width="197" valign="top">
+
+                <p>
+
+                    token
+
+                </p>
+
+            </td>
+
+            <td width="662" valign="top">
+
+                <p>
+
+                    4546f2cec1bf697336371c926e683fd2aa
+                </p>
+
+            </td>
+
+            <td width="197" valign="top">
+
+             <p>
+
+               Required
+
+           </p>
+
+       </td>
+
+   </tr>
+
+   
+    <tr>
+
+        <td width="197" valign="top">
+
+            <p>
+
+                jf_txt_1
+            </p>
+
+        </td>
+
+        <td width="662" valign="top">
+
+            <p>
+
+                שם מלא
+            </p>
+
+        </td>
+
+        <td width="197" valign="top">
+
+            <p>
+
+                Required
+            </p>
+
+        </td>
+
+    </tr>
+
+    
+    <tr>
+
+        <td width="197" valign="top">
+
+            <p>
+
+                jf_txt_2
+            </p>
+
+        </td>
+
+        <td width="662" valign="top">
+
+            <p>
+
+                טלפון
+            </p>
+
+        </td>
+
+        <td width="197" valign="top">
+
+            <p>
+
+                Required
+            </p>
+
+        </td>
+
+    </tr>
+
+    
+    <tr>
+
+        <td width="197" valign="top">
+
+            <p>
+
+                jf_txt_3
+            </p>
+
+        </td>
+
+        <td width="662" valign="top">
+
+            <p>
+
+                דואל
+            </p>
+
+        </td>
+
+        <td width="197" valign="top">
+
+            <p>
+
+                Required
+            </p>
+
+        </td>
+
+    </tr>
+
+    
+    <tr>
+
+        <td width="197" valign="top">
+
+            <p>
+
+                jf_chk_4
+            </p>
+
+        </td>
+
+        <td width="662" valign="top">
+
+            <p>
+
+                אישור דיוור
+            </p>
+
+        </td>
+
+        <td width="197" valign="top">
+
+            <p>
+
+                
+            </p>
+
+        </td>
+
+    </tr>
+
+    
+    <tr>
+
+        <td width="197" valign="top">
+
+            <p>
+
+                jf_combo_5
+            </p>
+
+        </td>
+
+        <td width="662" valign="top">
+
+            <p>
+
+                Select Field
+            </p>
+
+        </td>
+
+        <td width="197" valign="top">
+
+            <p>
+
+                Required
+            </p>
+
+        </td>
+
+    </tr>
+
+    
+<tr>
+
+    <td width="197" valign="top">
+
+        <p>
+
+            no_ajax
+
+        </p>
+
+    </td>
+
+    <td width="662" valign="top">
+
+        <p>
+
+            Set "true" if this is not an Ajax request
+
+        </p>
+
+    </td>
+
+    <td width="197" valign="top">
+
+        <p>
+
+            &nbsp;
+
+        </p>
+
+    </td>
+
+</tr>
+
+<tr>
+
+    <td width="197" valign="top">
+
+        <p>
+
+            furl
+
+        </p>
+
+    </td>
+
+    <td width="662" valign="top">
+
+        <p>
+
+            The URL of the form
+
+        </p>
+
+    </td>
+
+    <td width="197" valign="top">
+
+        <p>
+
+            &nbsp;
+
+        </p>
+
+    </td>
+
+</tr>
+
+<tr>
+
+    <td width="197" valign="top">
+
+        <p>
+
+            L
+
+        </p>
+
+    </td>
+
+    <td width="662" valign="top">
+
+        <p>
+
+            Language
+
+        </p>
+
+    </td>
+
+    <td width="197" valign="top">
+
+        <p>
+
+            &nbsp;
+
+        </p>
+
+    </td>
+
+</tr>
+
+<tr>
+
+    <td width="197" valign="top">
+
+        <p>
+
+            R
+
+        </p>
+
+    </td>
+
+    <td width="662" valign="top">
+
+        <p>
+
+            Resolution in 1920X1080 format
+
+        </p>
+
+    </td>
+
+    <td width="197" valign="top">
+
+        <p>
+
+            &nbsp;
+
+        </p>
+
+    </td>
+
+</tr>
+
+<tr>
+
+    <td width="197" valign="top">
+
+        <p>
+
+            ref
+
+        </p>
+
+    </td>
+
+    <td width="662" valign="top">
+
+        <p>
+
+            The source came from the website, for example: facebook
+
+        </p>
+
+    </td>
+
+    <td width="197" valign="top">
+
+        <p>
+
+            &nbsp;
+
+        </p>
+
+    </td>
+
+</tr>
+
+<tr>
+
+    <td width="197" valign="top">
+
+        <p>
+
+            media
+
+        </p>
+
+    </td>
+
+    <td width="662" valign="top">
+
+        <p>
+
+            The name of the banner from which they reached the website, for example: adwords
+
+        </p>
+
+    </td>
+
+    <td width="197" valign="top">
+
+        <p>
+
+            &nbsp;
+
+        </p>
+
+    </td>
+
+</tr>
+
+<tr>
+
+    <td width="197" valign="top">
+
+        <p>
+
+            source_referrer
+
+        </p>
+
+    </td>
+
+    <td width="662" valign="top">
+
+        <p>
+
+            Referring URL
+
+        </p>
+
+    </td>
+
+    <td width="197" valign="top">
+
+        <p>
+
+            &nbsp;
+
+        </p>
+
+    </td>
+
+</tr>
+
+<tr>
+
+    <td width="197" valign="top">
+
+        <p>
+
+            campaign_source
+
+        </p>
+
+    </td>
+
+    <td width="662" valign="top">
+
+        <p>
+
+            Utm parameter representing the source from which the link arrived (the parameter must be taken from the address bar)
+
+        </p>
+
+    </td>
+
+    <td width="197" valign="top">
+
+        <p>
+
+            &nbsp;
+
+        </p>
+
+    </td>
+
+</tr>
+
+<tr>
+
+    <td width="197" valign="top">
+
+        <p>
+
+            campaign_medium
+
+        </p>
+
+    </td>
+
+    <td width="662" valign="top">
+
+        <p>
+
+            Utm parameter representing the type of media from which the traffic reached the site (the parameter must be taken from the address bar)
+
+        </p>
+
+    </td>
+
+    <td width="197" valign="top">
+
+        <p>
+
+            &nbsp;
+
+        </p>
+
+    </td>
+
+</tr>
+
+<tr>
+
+    <td width="197" valign="top">
+
+        <p>
+
+            campaign_term
+
+        </p>
+
+    </td>
+
+    <td width="662" valign="top">
+
+        <p>
+
+            Utm parameter representing the keywords you use in the campaign (the parameter must be taken from the address bar)
+
+        </p>
+
+    </td>
+
+    <td width="197" valign="top">
+
+        <p>
+
+            &nbsp;
+
+        </p>
+
+    </td>
+
+</tr>
+
+<tr>
+
+    <td width="197" valign="top">
+
+        <p>
+
+            campaign_content
+
+        </p>
+
+    </td>
+
+    <td width="662" valign="top">
+
+        <p>
+
+            Utm parameter representing the campaign type (the parameter must be taken from the address bar)
+
+        </p>
+
+    </td>
+
+    <td width="197" valign="top">
+
+        <p>
+
+            &nbsp;
+
+        </p>
+
+    </td>
+
+</tr>
+
+<tr>
+
+    <td width="197" valign="top">
+
+        <p>
+
+            campaign_name
+
+        </p>
+
+    </td>
+
+    <td width="662" valign="top">
+
+        <p>
+
+            Utm parameter representing the name of the campaign (the parameter must be taken from the address bar)
+
+        </p>
+
+    </td>
+
+    <td width="197" valign="top">
+
+        <p>
+
+            &nbsp;
+
+        </p>
+
+    </td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+<br />
+
+<strong>
+
+  Response:
+
+</strong>
+
+<br /> After receiving the lead, an answer will appear on the screen containing the parameters:
+
+<br /> success=true
+
+<br /> data=unique_id
+
+<br />
+
+<br /> If an error occurs, you'll see the message:
+
+<br /> success=false
+
+<br />
+
+<br /> In the case of missing parameters or incorrect token, a 404 error message will appear.
+
+<br />
+
+<br />
+
+</div>
+
+</body>
+
+</html>

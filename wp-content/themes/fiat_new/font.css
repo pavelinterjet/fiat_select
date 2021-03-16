@@ -1,0 +1,48 @@
+
+@font-face {
+	font-family: 'migdalFont';
+	src: url('https://www.migdal.co.il/fonts/Migdal-Bold.eot');
+	src: url('https://www.migdal.co.il/fonts/Migdal-Bold.eot?#iefix') format('embedded-opentype'), 
+    url('assets/fonts/Migdal-Bold.woff') format('woff'), 
+    url('https://www.migdal.co.il/fonts/Migdal-Bold.ttf') format('truetype'), 
+    url("Migdal-Bold.otf") format("opentype");
+	font-weight: 700;
+	font-style: normal;
+	font-display: swap
+}
+
+@font-face {
+	font-family: 'migdalFont';
+	src: url('https://www.migdal.co.il/fonts/Migdal-Regular.eot');
+	src: url('https://www.migdal.co.il/fonts/Migdal-Regular.eot?#iefix') format('embedded-opentype'), 
+        url('assets/fonts/Migdal-Regular.woff') format('woff'), 
+        url('https://www.migdal.co.il/fonts/Migdal-Regular.ttf') format('truetype'), 
+        url("Migdal-Regular.otf") format("opentype");
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap
+}
+
+@font-face {
+	font-family: 'migdalFont';
+	src: url('https://www.migdal.co.il/fonts/Migdal-Light.eot');
+	src: url('https://www.migdal.co.il/fonts/Migdal-Light.eot?#iefix') format('embedded-opentype'), 
+        url('assets/fonts/Migdal-Regular.woff') format('woff'), 
+        url('https://www.migdal.co.il/fonts/Migdal-Light.ttf') format('truetype'), 
+        url("Migdal-Light.otf") format("opentype");
+	font-weight: 300;
+	font-style: normal;
+	font-display: swap
+}
+
+@font-face {
+	font-family: 'migdalFont';
+	src: url('https://www.migdal.co.il/fonts/migdal-thin-webfont.eot');
+	src: url('https://www.migdal.co.il/fonts/migdal-thin-webfont.eot?#iefix') format('embedded-opentype'), 
+        url('assets/fonts/Migdal-Light.woff') format('woff'), 
+        url('https://www.migdal.co.il/fonts/migdal-thin-webfont.ttf') format('truetype'), 
+        url("https://www.migdal.co.il/fonts/Migdal-thin.otf") format("opentype");
+	font-weight: 100;
+	font-style: normal;
+	font-display: swap
+}
