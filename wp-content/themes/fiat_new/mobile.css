@@ -85,8 +85,6 @@
     .slick-dots {
         margin-top: 40px;
     }
-
-
     .car_features  {
         padding-left: 15px;
         padding-right: 15px;
@@ -96,7 +94,6 @@
         border: none;
         text-align: center;
     }
-
     .blue_title {
         font-size: 18px;
     }
@@ -111,7 +108,21 @@
         max-width: 100px;
         margin-top: auto;
     }
-
+    .filter_lvl {
+        border-top: 1px solid #E0E0E0;
+        padding-top: 20px;
+        margin-bottom: 10px;
+    }
+    .filtered_carousel {
+        margin-bottom: 30px;
+    }
+    .colors .car_m .thumb {
+        max-width: 40px;
+    }
+    .big_button {
+        margin-bottom: 50px;
+        margin-top: 30px;
+    }
 
 }
 

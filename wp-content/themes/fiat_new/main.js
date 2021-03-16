@@ -191,9 +191,9 @@ $(function () {
 
 
     
-if( $(window).width <= 960 ) {
+if( $(window).width() < 960 ) {
 
-    $('.filter_lvl > div').slick({
+    $('.filter_lvl>div').slick({
         infinite: false,
         slidesToScroll: 1,
         slidesToShow: 3,
