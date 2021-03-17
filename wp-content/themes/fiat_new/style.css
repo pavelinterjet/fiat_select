@@ -719,3 +719,13 @@ form#form {
     left: 10px;
     top: 30px;
 }
+
+
+
+/* .submodels_block {
+    display: none;
+} */
+
+/* .submodels_block[data-submodel="0"] {
+    display: block;
+} */

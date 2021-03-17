@@ -1,8 +1,9 @@
+
 <div class="car_m <?php echo $args['counter'] == $args['max']?'active':'';?>" data-model='<?php echo $args['counter']; ?>' >
     <div class="thumb">
-        <img src="<?php echo $args['temp_path']; ?>/assets/img/Image 8@2x.png" alt="">
+        <img src="<?php echo $args['img_arr']['url']; ?>" alt="<?php echo $args['img_arr']['alt']; ?>">
     </div>
     <div class="title">
-        HATCHBACK
+        <?php echo $args['title']; ?>
     </div>
 </div>

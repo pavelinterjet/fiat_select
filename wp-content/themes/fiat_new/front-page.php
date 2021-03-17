@@ -1,6 +1,10 @@
 <?php get_header(); ?>
 
-<?php $templ_path = get_stylesheet_directory_uri(); ?>
+<?php $templ_path = get_stylesheet_directory_uri(); 
+
+$flds = get_fields();
+
+?>
 
 
 
@@ -45,29 +49,79 @@
                     </div>
                 </div>
                 <div class="right">
-                    <div class="car_models filter_lvl">
-                        <div class="flex_container flex__space_between flex_reverse_row">
-                            <?php echo get_template_part('elements/car_model', 'car_model' , ['max' => 2,'counter' => 0, 'temp_path' => $templ_path ] ); ?>
-                            <?php echo get_template_part('elements/car_model', 'car_model' , ['max' => 2, 'counter' => 1, 'temp_path' => $templ_path ] ); ?>
-                            <?php echo get_template_part('elements/car_model', 'car_model' , ['max' => 2,'counter' => 2, 'temp_path' => $templ_path ] ); ?>
-                        </div>
-                    </div>
-                    <div class="car_submodels filter_lvl">
-                        <div class="flex_container flex__space_between flex_reverse_row">
-                            <?php echo get_template_part('elements/car_submodel', 'car_submodel' , ['max' => 3,'counter' => 0, 'temp_path' => $templ_path ] ); ?>
-                            <?php echo get_template_part('elements/car_submodel', 'car_submodel' , ['max' => 3,'counter' => 1, 'temp_path' => $templ_path ] ); ?>
-                            <?php echo get_template_part('elements/car_submodel', 'car_submodel' , ['max' => 3,'counter' => 2, 'temp_path' => $templ_path ] ); ?>
-                            <?php echo get_template_part('elements/car_submodel', 'car_submodel' , ['max' => 3,'counter' => 3, 'temp_path' => $templ_path ] ); ?>
-                        </div>
-                    </div>
-                    <div class="colors filter_lvl">
-                        <div class="flex_container flex__space_between flex_reverse_row">
-                            <?php echo get_template_part('elements/car_colors', 'car_colors' , ['max' => 3,'counter' => 0, 'temp_path' => $templ_path ] ); ?>
-                            <?php echo get_template_part('elements/car_colors', 'car_colors' , ['max' => 3,'counter' => 1, 'temp_path' => $templ_path ] ); ?>
-                            <?php echo get_template_part('elements/car_colors', 'car_colors' , ['max' => 3,'counter' => 2, 'temp_path' => $templ_path ] ); ?>
-                            <?php echo get_template_part('elements/car_colors', 'car_colors' , ['max' => 3,'counter' => 3, 'temp_path' => $templ_path ] ); ?>
-                        </div>
-                    </div>
+
+
+
+                            <?php foreach ($flds as $key => $lvl_one_arr) { ?>
+
+                                <div class="car_models filter_lvl">
+                                    <div class="flex_container flex__space_between flex_reverse_row">
+                                    <?php foreach($lvl_one_arr as $k => $lvl_one): ?>
+                                        <?php $level_one_args = [
+                                            'title' => $lvl_one['car_title'],
+                                            'max' => max($lvl_one_arr),
+                                            'counter' => $k,
+                                            'temp_path' => $templ_path,
+                                            'img_arr' => $lvl_one['car_img']
+                                        ]; ?>
+                                        <?php echo get_template_part('elements/car_model', 'car_model' , $level_one_args ); ?>
+                                    <?php endforeach; ?>
+                                    </div>
+                                </div>
+
+                                <?php 
+                                // print_r($lvl_one['level_two']);
+                                // die;
+                                ?>
+
+                                <div class="car_submodels filter_lvl">
+                                    <div class="submodels_block" data-submodel='<?php echo $k;?>'>
+
+                                        <?php foreach($lvl_one[$key]['level_two'] as $key => $lvl_two):
+                                            
+                                            print_r($lvl_one['level_two'][$key]['logo']);
+
+                                            ?>
+
+                                            <div class="flex_container flex__space_between flex_reverse_row">
+
+                                                <?php $level_two_args = [
+                                                    'max' => max($lvl_one['level_two']),
+                                                    'counter' => $k,
+                                                    'temp_path' => $templ_path,
+                                                    'img_arr' => $lvl_two['logo']
+                                                ]; ?>
+
+                                                <?php echo get_template_part('elements/car_submodel', 'car_submodel' , $level_two_args ); ?>
+
+                                            </div>
+
+                                        <?php endforeach; ?>
+
+                                    </div>
+                                </div>
+
+                                <div class="colors filter_lvl">
+                                    <div class="flex_container flex__space_between flex_reverse_row">
+                                        <?php echo get_template_part('elements/car_colors', 'car_colors' , ['max' => 3,'counter' => 0, 'temp_path' => $templ_path ] ); ?>
+                                        <?php echo get_template_part('elements/car_colors', 'car_colors' , ['max' => 3,'counter' => 1, 'temp_path' => $templ_path ] ); ?>
+                                        <?php echo get_template_part('elements/car_colors', 'car_colors' , ['max' => 3,'counter' => 2, 'temp_path' => $templ_path ] ); ?>
+                                        <?php echo get_template_part('elements/car_colors', 'car_colors' , ['max' => 3,'counter' => 3, 'temp_path' => $templ_path ] ); ?>
+                                    </div>
+                                </div>
+
+
+                            <?php } ?>
+
+
+                    <!-- <div class="car_submodels filter_lvl">
+
+
+
+                    </div> -->
+
+
+
                     <div class="big_button">
                         <a href="">
                             <span>למפרט המלא</span>
