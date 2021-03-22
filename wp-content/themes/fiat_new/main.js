@@ -216,8 +216,13 @@ $.ajax({
 
             let bt = $('.blue_title').clone();
             let cf = $('.car_features').clone();
+            let sl = $('.secret_link a').clone()
 
-            $('.mobile_filter_content').html( bt + cf );
+            $('.mobile_filter_content').html('');
+            $('.mobile_filter_content').append( bt[0] );
+            $('.mobile_filter_content').append( cf[0] );
+            $('.big_button').html( sl[0] );
+
             $('.filtered_carousel').slick(filtered_car_par);
 
         }
@@ -249,22 +254,14 @@ $('.filter_lvl .car_m').click(function(){
             if( data.length > 0 ) {
                 $('.car_filter .left').html( data );
 
-
                 let bt = $('.blue_title').clone();
                 let cf = $('.car_features').clone();
                 let sl = $('.secret_link a').clone()
 
-                console.log(sl[0]);
-    
                 $('.mobile_filter_content').html('');
                 $('.mobile_filter_content').append( bt[0] );
                 $('.mobile_filter_content').append( cf[0] );
-
                 $('.big_button').html( sl[0] );
-
-
-
-                $('.filtered_carousel').slick(filtered_car_par);
 
                 $('.filtered_carousel').slick(filtered_car_par);
             }
