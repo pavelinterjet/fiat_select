@@ -1,16 +1,73 @@
-<?php get_header(); ?>
+<?php
 
-<?php $templ_path = get_stylesheet_directory_uri(); 
+
+$templ_path = get_stylesheet_directory_uri(); 
 
 $flds = get_fields();
 
+
+
+if( isAjax() ) {
+
+    $cmodel = $_POST['car_models'];
+    $sub_model = $_POST['submodels'];
+    $colors = $_POST['car_colors'];
+
+    $argz = [
+        'post_type' => 'car_gallery',
+        'meta_query' => [
+            'relation' => 'AND',
+            [
+                'key' => 'model_filter',
+                'value' => $cmodel,
+                'compare' => 'LIKE'
+            ],
+            [
+                'key' => 'sub_model_filter',
+                'value' => $sub_model,
+                'compare' => 'LIKE'
+            ],
+            [
+                'key' => 'color_filter',
+                'value' => $colors,
+                'compare' => 'LIKE'
+            ],
+        ]
+    ];
+    $galz = new WP_Query($argz);
+
+
+    // print_r($galz->posts);
+
+    echo get_template_part('elements/car_features' , 'car_features' , $galz->posts);
+
+    
+    die();
+}
+
+$m_args = [
+    'post_type' => ['models']
+];
+$m_q = new WP_Query($m_args);
+
+$subm_args = [
+    'post_type' => ['sub-models']
+];
+$sub_m_q = new WP_Query($subm_args);
+
+$color_args = [
+    'post_type' => ['colors']
+];
+$color_q = new WP_Query($color_args);
+
+$args = [
+    'post_type' => 'car_gallery',
+];
+$gals = new WP_Query($args);
+
 ?>
 
-
-
-
-
-
+<?php get_header(); ?>
 
 
 <section class="wrapper">
@@ -26,101 +83,56 @@ $flds = get_fields();
         <div class="container">
             <div class="flex_container flex_reverse_row flex__space_between">
                 <div class="left">
-                    <div class="filtered_carousel">
-                        <div class="car_img">
-                            <img src="<?php echo $templ_path;?>/assets/img/3.png" alt="">
-                        </div>
-                        <div class="car_img">
-                            <img src="<?php echo $templ_path;?>/assets/img/1.png" alt="">
-                        </div>
-                    </div>
-                    <div class="is_desktop">
-                        <div class="blue_title">CABRIO / LA PRIMA / OCEAN GREEN</div>
-                        <div class="car_features ">
-                            <ul class="flex_container flex__space_between flex_no_wrap__d">
-                                <?php echo get_template_part('elements/car_features' , 'features' , ['חישוקי סגסוגת 17”' , 'תאורת LED']) ?>
-                                <?php echo get_template_part('elements/car_features' , 'features' , ['חישוקי סגסוגת 17”' , 'תאורת LED']) ?>
-                                <?php echo get_template_part('elements/car_features' , 'features' , ['חישוקי סגסוגת 17”' , 'תאורת LED']) ?>
-                                <?php echo get_template_part('elements/car_features' , 'features' , ['חישוקי סגסוגת 17”' , 'תאורת LED']) ?>
-                                <?php echo get_template_part('elements/car_features' , 'features' , ['חישוקי סגסוגת 17”' , 'תאורת LED']) ?>
-                                <?php echo get_template_part('elements/car_features' , 'features' , ['חישוקי סגסוגת 17”' , 'תאורת LED']) ?>
-                            </ul>
-                        </div>
-                    </div>
+
                 </div>
                 <div class="right">
-
-
-
-                            <?php foreach ($flds as $key => $lvl_one_arr) { ?>
-
-                                <div class="car_models filter_lvl">
-                                    <div class="flex_container flex__space_between flex_reverse_row">
-                                    <?php foreach($lvl_one_arr as $k => $lvl_one): ?>
-                                        <?php $level_one_args = [
-                                            'title' => $lvl_one['car_title'],
-                                            'max' => max($lvl_one_arr),
-                                            'counter' => $k,
-                                            'temp_path' => $templ_path,
-                                            'img_arr' => $lvl_one['car_img']
-                                        ]; ?>
-                                        <?php echo get_template_part('elements/car_model', 'car_model' , $level_one_args ); ?>
-                                    <?php endforeach; ?>
-                                    </div>
-                                </div>
-
-                                <?php 
-                                // print_r($lvl_one['level_two']);
-                                // die;
-                                ?>
-
-                                <div class="car_submodels filter_lvl">
-                                    <div class="submodels_block" data-submodel='<?php echo $k;?>'>
-
-                                        <?php foreach($lvl_one[$key]['level_two'] as $key => $lvl_two):
-                                            
-                                            print_r($lvl_one['level_two'][$key]['logo']);
-
-                                            ?>
-
-                                            <div class="flex_container flex__space_between flex_reverse_row">
-
-                                                <?php $level_two_args = [
-                                                    'max' => max($lvl_one['level_two']),
-                                                    'counter' => $k,
-                                                    'temp_path' => $templ_path,
-                                                    'img_arr' => $lvl_two['logo']
-                                                ]; ?>
-
-                                                <?php echo get_template_part('elements/car_submodel', 'car_submodel' , $level_two_args ); ?>
-
-                                            </div>
-
-                                        <?php endforeach; ?>
-
-                                    </div>
-                                </div>
-
-                                <div class="colors filter_lvl">
-                                    <div class="flex_container flex__space_between flex_reverse_row">
-                                        <?php echo get_template_part('elements/car_colors', 'car_colors' , ['max' => 3,'counter' => 0, 'temp_path' => $templ_path ] ); ?>
-                                        <?php echo get_template_part('elements/car_colors', 'car_colors' , ['max' => 3,'counter' => 1, 'temp_path' => $templ_path ] ); ?>
-                                        <?php echo get_template_part('elements/car_colors', 'car_colors' , ['max' => 3,'counter' => 2, 'temp_path' => $templ_path ] ); ?>
-                                        <?php echo get_template_part('elements/car_colors', 'car_colors' , ['max' => 3,'counter' => 3, 'temp_path' => $templ_path ] ); ?>
-                                    </div>
-                                </div>
-
-
-                            <?php } ?>
-
-
-                    <!-- <div class="car_submodels filter_lvl">
-
-
-
-                    </div> -->
-
-
+                    <div class="car_models filter_lvl">
+                        <div class="flex_container flex__space_between flex_reverse_row">
+                            <?php $mcc = 0; 
+                            while ($m_q->have_posts()) {
+                                $m_q->the_post();
+                                $mcc++;
+                                $level_one_args = [
+                                    'counter' => $mcc,
+                                    'max'     => $m_q->post_count,
+                                    'p_id'    => get_the_ID()
+                                ];
+                                echo get_template_part('elements/car_model', 'car_model' , $level_one_args );
+                            } wp_reset_postdata();?>
+                            <?php  ?>
+                        </div>
+                    </div>
+                    <div class="car_submodels filter_lvl">
+                            <div class="flex_container flex__space_between flex_reverse_row">
+                                <?php $s_mcc = 0; 
+                                while ($sub_m_q->have_posts()) {
+                                    $sub_m_q->the_post();
+                                    $s_mcc++;
+                                    $level_two_args = [
+                                        'counter' => $s_mcc,
+                                        'max'     => $sub_m_q->post_count,
+                                        'sp_id'    => get_the_ID()
+                                    ];
+                                    echo get_template_part('elements/car_submodel', 'car_submodel' , $level_two_args );
+                                } wp_reset_postdata(); ?>
+                            </div>
+                    </div>
+                    <div class="colors filter_lvl">
+                        <div class="flex_container flex__space_between flex_reverse_row">
+                            <?php 
+                            $colorcc = 0; 
+                                while ($color_q->have_posts()) {
+                                    $color_q->the_post();
+                                    $colorcc++;
+                                    $level_three_args = [
+                                        'counter' => $colorcc,
+                                        'max'     => $color_q->post_count,
+                                        'sp_id'    => get_the_ID()
+                                    ];
+                                    echo get_template_part('elements/car_colors', 'car_colors' , $level_three_args );
+                            } wp_reset_postdata(); ?>
+                        </div>
+                    </div>
 
                     <div class="big_button">
                         <a href="">
@@ -130,16 +142,8 @@ $flds = get_fields();
                     </div>
 
                     <div class="is_mobile">
-                        <div class="blue_title">CABRIO / LA PRIMA / OCEAN GREEN</div>
-                        <div class="car_features ">
-                            <ul class="flex_container flex__space_between flex_no_wrap__d">
-                                <?php echo get_template_part('elements/car_features' , 'features' , ['חישוקי סגסוגת 17”' , 'תאורת LED']) ?>
-                                <?php echo get_template_part('elements/car_features' , 'features' , ['חישוקי סגסוגת 17”' , 'תאורת LED']) ?>
-                                <?php echo get_template_part('elements/car_features' , 'features' , ['חישוקי סגסוגת 17”' , 'תאורת LED']) ?>
-                                <?php echo get_template_part('elements/car_features' , 'features' , ['חישוקי סגסוגת 17”' , 'תאורת LED']) ?>
-                                <?php echo get_template_part('elements/car_features' , 'features' , ['חישוקי סגסוגת 17”' , 'תאורת LED']) ?>
-                                <?php echo get_template_part('elements/car_features' , 'features' , ['חישוקי סגסוגת 17”' , 'תאורת LED']) ?>
-                            </ul>
+                        <div class="mobile_filter_content">
+                            
                         </div>
                     </div>
 
@@ -149,14 +153,28 @@ $flds = get_fields();
     </section>
 
 
+    <!-- <div class="blue_title">CABRIO / LA PRIMA / OCEAN GREEN</div>
+    <div class="car_features ">
+        <ul class="flex_container flex__space_between flex_no_wrap__d">
+            <?php
+                // while($gals->have_posts()) {
+                //     $gals->the_post();
+                //     echo get_template_part('elements/car_features' , 'features', ['gal_id' => get_the_ID()] );
+                // }
+                // wp_reset_postdata();
+            ?>
+        </ul>
+    </div> -->
+
     <section class="big_slider">
 
-
-        <?php echo get_template_part('elements/slide' , 'slide' , ['temp_path' => $templ_path] );  ?>
-        <?php echo get_template_part('elements/slide' , 'slide' , ['temp_path' => $templ_path] );  ?>
-        <?php echo get_template_part('elements/slide' , 'slide' , ['temp_path' => $templ_path] );  ?>
-        <?php echo get_template_part('elements/slide' , 'slide' , ['temp_path' => $templ_path] );  ?>
-
+    <?php 
+    if ($flds['slides']) {
+        foreach( $flds['slides'] as $sld ) {
+            echo get_template_part('elements/slide' , 'slide' , ['field' => $sld] );
+        }
+    }
+    ?>
 
     </section>
 

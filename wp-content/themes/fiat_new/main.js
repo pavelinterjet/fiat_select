@@ -173,8 +173,9 @@ $(function () {
 
 
 
-    $('.filtered_carousel').slick({
-        rtl: true,
+
+var filtered_car_par = {
+        rtl: false,
         slidesToShow: 1,
         slidesToScroll: 1,
         arrows: false,
@@ -184,15 +185,101 @@ $(function () {
         speed: 500,
         cssEase: 'ease-in-out',
         touchThreshold: 100,
-        draggable: true,
+        draggable: true };
 
+
+$('.filtered_carousel').slick(filtered_car_par);
+
+
+
+
+$(this).parent().find('.car_m').removeClass('active');
+$(this).addClass('active');
+var cmodels = $('.car_models .car_m.active').attr('data-filter');
+var submodels    = $('.car_submodels .car_m.active').attr('data-filter');
+var car_colors = $('.colors .car_m.active').attr('data-filter');
+var data = {
+    car_models: cmodels,
+    submodels: submodels,
+    car_colors: car_colors
+};
+$.ajax({
+    url: '',
+    type: 'POST',
+    data,
+    // dataType: "json",
+    success: function(data){
+
+        if( data.length > 0 ) {
+
+            $('.car_filter .left').html( data);
+
+            let bt = $('.blue_title').clone();
+            let cf = $('.car_features').clone();
+
+            $('.mobile_filter_content').html( bt + cf );
+            $('.filtered_carousel').slick(filtered_car_par);
+
+        }
+    }
+})
+
+
+
+$('.filter_lvl .car_m').click(function(){
+
+
+    $(this).parent().find('.car_m').removeClass('active');
+    $(this).addClass('active');
+    var cmodels = $('.car_models .car_m.active').attr('data-filter');
+    var submodels    = $('.car_submodels .car_m.active').attr('data-filter');
+    var car_colors = $('.colors .car_m.active').attr('data-filter');
+    var data = {
+        car_models: cmodels,
+        submodels: submodels,
+        car_colors: car_colors
+    };
+    $.ajax({
+        url: '',
+        type: 'POST',
+        data,
+        // dataType: "json",
+        success: function(data){
+
+            if( data.length > 0 ) {
+                $('.car_filter .left').html( data );
+
+
+                let bt = $('.blue_title').clone();
+                let cf = $('.car_features').clone();
+                let sl = $('.secret_link a').clone()
+
+                console.log(sl[0]);
+    
+                $('.mobile_filter_content').html('');
+                $('.mobile_filter_content').append( bt[0] );
+                $('.mobile_filter_content').append( cf[0] );
+
+                $('.big_button').html( sl[0] );
+
+
+
+                $('.filtered_carousel').slick(filtered_car_par);
+
+                $('.filtered_carousel').slick(filtered_car_par);
+            }
+        }
     })
+
+
+})
+
+    
 
 
 
     
 if( $(window).width() < 960 ) {
-
     $('.filter_lvl>div').slick({
         infinite: false,
         slidesToScroll: 1,
@@ -200,46 +287,36 @@ if( $(window).width() < 960 ) {
         speed: 500,
         arrows: false,
         rtl: true,
-    })
-    
+        responsive: [
+            {
+                breakpoint: 500,
+                settings: {
+                    swipe: true,
+                    slidesToShow: 2,
+                }
+            },
+            
+        ]
+    });
 }
 
-
-
-
-
-
-
     
-    
-    
-    
-    $("a").on('click', function(event) {
+$("a").on('click', function(event) {
         // Make sure this.hash has a value before overriding default behavior
-        if (this.hash !== "") {
+    if (this.hash !== "") {
           // Prevent default anchor click behavior
           event.preventDefault();
-    
           // Store hash
           var hash = this.hash;
-    
           // Using jQuery's animate() method to add smooth page scroll
           // The optional number (800) specifies the number of milliseconds it takes to scroll to the specified area
           $('html, body').animate({
             scrollTop: $(hash).offset().top
           }, 800, function(){
-    
             // Add hash (#) to URL when done scrolling (default click behavior)
             window.location.hash = hash;
           });
         } // End if
-      });
-    
-    
-    
-
+    });
 
 })
-
-
-

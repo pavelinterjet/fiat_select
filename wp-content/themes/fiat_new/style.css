@@ -271,9 +271,15 @@ section.car_filter {
 }
 .car_filter .car_m {
     text-align: center;
+    cursor: pointer;
+    transition: border-bottom 0.2s ease-in-out;
 }
 .car_filter .car_m .thumb {
     max-width: 96px;
+    margin: 0 auto;
+}
+
+.car_filter .car_m .thumb img {
     margin: 0 auto;
 }
 
@@ -282,14 +288,21 @@ section.car_filter {
     border-bottom: 1px solid #E0E0E0;
     margin-bottom: 40px;
 }
-.filter_lvl .active {
+.filter_lvl .active,
+.filter_lvl .car_m:hover
+{
     border-bottom: 5px solid #00C0D7;
     padding-bottom: 10px;
 }
 
+
+
 .colors .car_m .thumb {
-    max-width: 25px;
+    max-width: 35px;
     margin: 0 auto;
+    border: 1px solid;
+    border-radius: 50%;
+    padding: 4px;
 }
 
 .car_filter .left {
