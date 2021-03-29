@@ -1,4 +1,9 @@
 <?php 
+
+error_reporting(E_ALL);
+ini_set("display_errors", 1);
+
+
 add_theme_support( 'title-tag' );
 add_theme_support( 'custom-logo', array(
     'height' => 480,
@@ -122,17 +127,171 @@ function fiat_post_types() {
 }
 add_action( 'init', 'fiat_post_types' );
 
+function get_available_models() {
+    $args_gal = [
+        'post_type' => 'car_gallery',
+        'fields'    => 'ids',
+    ];
+
+    $galz = new WP_Query($args_gal);
+
+    $availabel_submodels = [];
+
+    while ( $galz->have_posts() ) { $galz->the_post();
+
+        if( get_field('model_filter' , get_the_ID() ) ) {
+            $availabel_submodels[] = get_field('model_filter' , get_the_ID() );
+        }
+
+    } wp_reset_postdata();
+
+    if( $availabel_submodels ) {
+        $flat = call_user_func_array('array_merge', $availabel_submodels);
+    }
+    return $flat;
+}
 
 
-// add_action('wp_ajax_my_user_vote' , 'my_user_vote');
-// add_action('wp_ajax_nopriv_my_user_vote' , 'my_user_vote');
+function get_available_submodels($field,$ids) {
 
-// function my_user_vote() {
 
-//     print_r( $_POST );
 
-//     wp_die();
-// }
+
+    $meta_query['relation'] = 'OR';
+    foreach ( array_unique($ids) as $id ) {
+
+        $meta_query[] = [
+
+            [
+                'key' => 'model_filter',
+                'value' => '"'.$id.'"',
+                'compare' => 'LIKE'
+            ]
+
+        ];
+
+    }
+
+ 
+    $argz = [
+        'posts_per_page' => -1,
+        'post_type' => 'car_gallery',
+        'fields'    => 'ids',
+        // 'meta_query' => $meta_query
+    ];
+
+    $galz = new WP_Query($argz);
+
+
+    // print_r($galz->posts);
+
+    $availabel_submodels = [];
+    while ( $galz->have_posts() ) { $galz->the_post();
+
+
+        if( get_field( 'model_filter' , get_the_ID() ) ) {
+            $availabel_submodels[] = get_field('submodel_filter' , get_the_ID());
+        }
+
+
+    } wp_reset_postdata();
+
+
+    if( $availabel_submodels && is_array( $availabel_submodels ) ) {
+        $flat = call_user_func_array('array_merge', $availabel_submodels);
+    }
+
+    // print_r( array_unique($flat) );
+
+    return  array_unique($flat);
+}
+
+
+
+function get_available_colors($field,$ids) {
+
+    $meta_query['relation'] = 'OR';
+
+    foreach (array_unique($ids) as $id) {
+        $meta_query[] = [
+            [
+                'key' => $field.'_filter',
+                'value' => '"'.$id.'"',
+                'compare' => 'LIKE'
+            ]
+        ];
+    }
+    $argz = [
+        'posts_per_page' => -1,
+        'post_type' => 'car_gallery',
+        // 'meta_query' => $meta_query
+    ];
+
+    $galz = new WP_Query($argz);
+    $availabel_colors = [];
+    while ( $galz->have_posts() ) { $galz->the_post();
+        if( get_field( 'model_filter' , get_the_ID() ) ) {
+            $availabel_colors[] = get_field('colors_filter' , get_the_ID());
+        }
+    } wp_reset_postdata();
+    if( $availabel_colors && is_array( $availabel_colors ) ) {
+        $flat = call_user_func_array('array_merge', $availabel_colors);
+    }
+
+    return  array_unique($flat);
+}
+
+
+
+
+function check_availability($filter,  $id) {
+
+
+    // print_r($filter);
+
+    // echo '<br/>';
+
+    // print_r($id);
+
+    $argz = [
+        'post_type' => 'car_gallery',
+        'posts_per_page' => -1,
+        'meta_query' => [
+            [
+                'key' => $filter.'_filter',
+                'value' => '"'. $id . '"',
+                'compare' => 'LIKE'
+            ],
+        ]
+    ];
+    $galz = new WP_Query($argz);
+    $big_arr = [];
+        foreach ($galz->posts as $key => $gal) {
+            if( $filter == 'model' ) { 
+
+                $big_arr['submodel'][$key] = get_field('submodel_filter' , $gal->ID);
+                $big_arr['colors'][$key] = get_field('colors_filter' , $gal->ID);
+
+            } else if( $filter == 'submodel' ) { 
+
+                $big_arr['model'][$key] = get_field('model_filter' , $gal->ID);
+                $big_arr['colors'][$key] = get_field('colors_filter' , $gal->ID);
+
+            } else if( $filter == 'colors' ) {
+
+                $big_arr['model'][$key] = get_field('model_filter' , $gal->ID);
+                $big_arr['submodel'][$key] = get_field('submodel_filter' , $gal->ID);
+
+            }
+        }
+
+        // print_r($big_arr);
+
+    return $big_arr;
+}
+
+
+
 
 
 

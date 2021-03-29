@@ -41,6 +41,8 @@ jQuery(document).ready(function($){
 
     
 const galleryBev = function ($list) {
+
+
   $list.each(function(){
       const $comp = $(this);
 
@@ -193,66 +195,67 @@ $('.filtered_carousel').slick(filtered_car_par);
 
 
 
-$(this).parent().find('.car_m').removeClass('active');
-$(this).addClass('active');
-var cmodels = $('.car_models .car_m.active').attr('data-filter');
-var submodels    = $('.car_submodels .car_m.active').attr('data-filter');
-var car_colors = $('.colors .car_m.active').attr('data-filter');
-var data = {
-    car_models: cmodels,
-    submodels: submodels,
-    car_colors: car_colors
-};
-$.ajax({
-    url: '',
-    type: 'POST',
-    data,
-    // dataType: "json",
-    success: function(data){
 
-        if( data.length > 0 ) {
-
-            $('.car_filter .left').html( data);
-
-            let bt = $('.blue_title').clone();
-            let cf = $('.car_features').clone();
-            let sl = $('.secret_link a').clone()
-
-            $('.mobile_filter_content').html('');
-            $('.mobile_filter_content').append( bt[0] );
-            $('.mobile_filter_content').append( cf[0] );
-            $('.big_button').html( sl[0] );
-
-            $('.filtered_carousel').slick(filtered_car_par);
-
-        }
-    }
-})
 
 
 
 $('.filter_lvl .car_m').click(function(){
-
-
     $(this).parent().find('.car_m').removeClass('active');
-    $(this).addClass('active');
+    $(this).addClass('active bright');
+
+    var that = $(this);
+ 
+    var filter_type = $(this).attr('data-filter_type');
+    var current_filter = $(this).attr('data-filter');
+
     var cmodels = $('.car_models .car_m.active').attr('data-filter');
     var submodels    = $('.car_submodels .car_m.active').attr('data-filter');
     var car_colors = $('.colors .car_m.active').attr('data-filter');
+
+
     var data = {
         car_models: cmodels,
         submodels: submodels,
-        car_colors: car_colors
+        car_colors: car_colors,
+        filter_type: filter_type,
+        current_filter: current_filter
     };
+
     $.ajax({
         url: '',
         type: 'POST',
         data,
-        // dataType: "json",
-        success: function(data){
+        dataType: "json",
+        beforeSend: function() {
+            $('.preloader').fadeIn();
+            $('.left,.big_slider').addClass('loading');
+        },
+        success: function(data, textStatus, jqXHR){
 
-            if( data.length > 0 ) {
-                $('.car_filter .left').html( data );
+            $('.preloader').fadeOut();
+            $('.left,.big_slider').removeClass('loading');
+
+            $('.car_m').removeClass('bright');
+            $(that).addClass('bright');
+                var av = data['available'];
+                if( typeof av['model'] != 'undefined' ) {
+                    for (let i = 0; i < av['model'].length; i++) {
+                        $('.car_m[data-filter_type="model"][data-filter="filter_'+av['model'][i][0]+'"]').addClass('bright');
+                    }
+                }
+                if( typeof av['colors'] != 'undefined' ) {
+                    for (let i = 0; i < av['colors'].length; i++) {
+                        $('.car_m[data-filter_type="colors"][data-filter="filter_'+av['colors'][i][0]+'"]').addClass('bright');
+                    }
+                }
+                if( typeof av['submodel'] != 'undefined') {
+                    for (let i = 0; i < av['submodel'].length; i++) {
+                        $('.car_m[data-filter_type="submodel"][data-filter="filter_'+av['submodel'][i][0]+'"]').addClass('bright');
+                    }
+                }
+                
+            if( data['content'].length > 0 ) {
+                $('.car_filter .left').html( data['content'] );
 
                 let bt = $('.blue_title').clone();
                 let cf = $('.car_features').clone();
@@ -264,15 +267,38 @@ $('.filter_lvl .car_m').click(function(){
                 $('.big_button').html( sl[0] );
 
                 $('.filtered_carousel').slick(filtered_car_par);
+                $('.big_slider').html('');
+                $('.big_slider').slick('unslick');
+                $('.big_slider').html( data['bottom_gal'] );
+
+
+                // setTimeout(function(){
+                    $('.car_models').each(function(i){
+                        $('.car_models .car_m').removeClass('active');
+                        $(this).find('.bright').eq(0).addClass('active');
+                    })
+                    $('.car_submodels').each(function(i){
+                        $('.car_submodels .car_m').removeClass('active');
+                        $(this).find('.bright').eq(0).addClass('active');
+                    })
+                    $('.colors').each(function(i){
+                        $('.colors .car_m').removeClass('active');
+                        $(this).find('.bright').eq(0).addClass('active');
+                    })
+                // },1000)
+
+                inPage('big_slider', galleryBev);
+
             }
         }
     })
 
-
 })
 
-    
 
+$('.car_models .car_m[data-count="1"]').trigger('click');
+$('.car_submodels .car_m[data-count="1"]').trigger('click');
+$('.colors .car_m[data-count="1"]').trigger('click');
 
 
     

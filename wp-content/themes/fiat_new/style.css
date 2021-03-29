@@ -268,12 +268,36 @@ section.car_filter {
 .car_filter .right {
     max-width: 430px;
     width: 30%;
+    position: relative;
+}
+.preloader {
+    position: absolute;
+    z-index: 9;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    background-color: rgb(255 255 255 / 50%);
+    display: none;
+}
+
+.preloader img {
+    margin: auto auto;
+    position: relative;
+    top: 50%;
+    margin-top: -120px;
 }
 .car_filter .car_m {
     text-align: center;
     cursor: pointer;
     transition: border-bottom 0.2s ease-in-out;
+    opacity: 0.5;
+    /* pointer-events: none; */
 }
+.car_filter .car_m.bright {
+    opacity: 1;
+    /* pointer-events: all; */
+}
+
 .car_filter .car_m .thumb {
     max-width: 96px;
     margin: 0 auto;
@@ -309,6 +333,13 @@ section.car_filter {
     width: 60%;
     max-width: 810px;
     margin-top: -120px;
+    transition: opacity 0.3s ease-in-out;
+    -webkit-transition: opacity 0.3s ease-in-out;
+    -moz-transition: opacity 0.3s ease-in-out;
+}
+
+.car_filter .left.loading {
+    opacity: 0.5;
 }
 
 .blue_title {
@@ -345,7 +376,15 @@ section.car_filter {
 .big_slider {
     direction: ltr;
     padding-bottom: 40px;
+    transition: opacity 0.3s ease-in-out;
+    -webkit-transition: opacity 0.3s ease-in-out;
+    -moz-transition: opacity 0.3s ease-in-out;
 }
+
+.big_slider.loading {
+    opacity: 0.5;
+}
+
 .big_slider .slide {
     direction: rtl;
     -webkit-transition: all .4s linear;
