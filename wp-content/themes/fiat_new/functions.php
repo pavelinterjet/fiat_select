@@ -246,13 +246,6 @@ function get_available_colors($field,$ids) {
 
 function check_availability($filter,  $id) {
 
-
-    // print_r($filter);
-
-    // echo '<br/>';
-
-    // print_r($id);
-
     $argz = [
         'post_type' => 'car_gallery',
         'posts_per_page' => -1,
@@ -267,26 +260,26 @@ function check_availability($filter,  $id) {
     $galz = new WP_Query($argz);
     $big_arr = [];
         foreach ($galz->posts as $key => $gal) {
+
             if( $filter == 'model' ) { 
-
                 $big_arr['submodel'][$key] = get_field('submodel_filter' , $gal->ID);
                 $big_arr['colors'][$key] = get_field('colors_filter' , $gal->ID);
-
             } else if( $filter == 'submodel' ) { 
-
                 $big_arr['model'][$key] = get_field('model_filter' , $gal->ID);
                 $big_arr['colors'][$key] = get_field('colors_filter' , $gal->ID);
-
-            } else if( $filter == 'colors' ) {
-
+            } else if( $filter == 'colors'  ) {
                 $big_arr['model'][$key] = get_field('model_filter' , $gal->ID);
                 $big_arr['submodel'][$key] = get_field('submodel_filter' , $gal->ID);
+            } 
 
-            }
+
+            
+
         }
 
-        // print_r($big_arr);
+        $big_arr[$filter][][] = $id; 
 
+        
     return $big_arr;
 }
 

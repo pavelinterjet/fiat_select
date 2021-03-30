@@ -25,17 +25,25 @@ $available_colors = get_available_colors('model', $available_models);
 
 
 if( isAjax() ) {
-
+    $cmodel = '';
+    $sub_model = '';
+    $colors ='';
 
     if( isset($_POST['car_models']) ) {
         $cmodel = str_replace('filter_','', $_POST['car_models']);
+        check_availability( 'model',  $cmodel );
     }
+
     if( isset($_POST['submodels']) ) {
         $sub_model = str_replace('filter_','', $_POST['submodels']);
+        check_availability( 'submodel',  $sub_model );
     }
     if( isset($_POST['car_colors']) ) {
         $colors = str_replace('filter_','', $_POST['car_colors']);
+        check_availability( 'colors',  $colors );
     }
+
+
     if( isset($_POST['filter_type']) ) {
         $filter_type = $_POST['filter_type'];
     }
@@ -44,33 +52,33 @@ if( isAjax() ) {
     }
     $available = check_availability($filter_type, $current_filter);
 
+    // print_r($available);
+
+    $meta_query['relation'] = 'AND';
+    foreach ($available as $key => $av_item) {
+        
+
+        $meta_query[] = [
+            'key' => $key.'_filter',
+            'value' => '"'. $av_item[0][0] .'"',
+            'compare' => 'LIKE'
+        ];
+
+
+
+    }
+
+
+    // print_r($meta_query);
+
     $argz = [
         'post_type' => 'car_gallery',
-        'meta_query' => [
-            'relation' => 'AND',
-            [
-                'key' => 'model_filter',
-                'value' => '"'. $cmodel .'"',
-                'compare' => 'LIKE'
-            ],
-            [
-                'key' => 'submodel_filter',
-                'value' => '"'. $sub_model .'"',
-                'compare' => 'LIKE'
-            ],
-            [
-                'key' => 'colors_filter',
-                'value' => '"'. $colors .'"',
-                'compare' => 'LIKE'
-            ],
-        ]
+        'meta_query' => $meta_query
     ];
 
     // print_r($argz);
 
-
-
-
+    
     $galz = new WP_Query($argz);
     if( $galz->post_count > 0 ) {
         ob_start();
@@ -169,7 +177,7 @@ $gals = new WP_Query($args);
                                 } wp_reset_postdata(); ?>
                             </div>
                     </div>
-                    <div class="colors filter_lvl">
+                    <div class="car_colors filter_lvl">
                         <div class="flex_container flex__space_between ">
                             <?php 
                             $colorcc = 0; 

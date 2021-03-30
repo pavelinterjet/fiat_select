@@ -201,25 +201,26 @@ $('.filtered_carousel').slick(filtered_car_par);
 
 $('.filter_lvl .car_m').click(function(){
 
-    console.log('test');
-
     $(this).parent().find('.car_m').removeClass('active');
+    // $('.filter_lvl .car_m').removeClass('active');
+
     $(this).addClass('active bright');
+
 
     var that = $(this);
  
     var filter_type = $(this).attr('data-filter_type');
     var current_filter = $(this).attr('data-filter');
 
-    var cmodels = $('.car_models .car_m.active').attr('data-filter');
-    var submodels    = $('.car_submodels .car_m.active').attr('data-filter');
-    var car_colors = $('.colors .car_m.active').attr('data-filter');
+    var cmodels = $('.car_models').attr('data-filter');
+    var submodels    = $('.car_submodels').attr('data-filter');
+    var car_colors = $('.car_colors').attr('data-filter');
 
 
     var data = {
-        car_models: cmodels,
-        submodels: submodels,
-        car_colors: car_colors,
+        // car_models: cmodels,
+        // submodels: submodels,
+        // car_colors: car_colors,
         filter_type: filter_type,
         current_filter: current_filter
     };
@@ -235,11 +236,15 @@ $('.filter_lvl .car_m').click(function(){
         },
         success: function(data, textStatus, jqXHR){
 
+
+
             $('.preloader').fadeOut();
             $('.left,.big_slider').removeClass('loading');
 
             $('.car_m').removeClass('bright');
-            $(that).addClass('bright');
+
+                $(that).addClass('bright');
+
                 var av = data['available'];
                 if( typeof av['model'] != 'undefined' ) {
                     for (let i = 0; i < av['model'].length; i++) {
@@ -277,25 +282,26 @@ $('.filter_lvl .car_m').click(function(){
 
                 setTimeout(function(){
 
-                    console.log('jopa');
+                    // $('.car_models .car_m.bright').each(function(i){
+                    //     $('.car_models .car_m').removeClass('active');
+                    //     $(this).addClass('active');
+                    // })
+                    // $('.car_submodels .car_m.bright:last-of-type').each(function(i){
+                    //     $('.car_submodels .car_m').removeClass('active');
+                    //     $(this).addClass('active');
+                    // })
+                    // $('.car_colors .car_m.bright:last-of-type').each(function(i){
+                    //     $('.car_colors .car_m').removeClass('active');
+                    //     $(this).addClass('active');
+                    // })
 
-                    
-                    $('.car_models .car_m').each(function(i){
 
-                        $('.car_models .car_m').removeClass('active');
-                        $(this).find('.bright').addClass('active');
-                        
-                    })
-                    $('.car_submodels .car_m').each(function(i){
-                        $('.car_submodels .car_m').removeClass('active');
-                        $(this).find('.bright').addClass('active');
-                    })
-                    $('.colors .car_m').each(function(i){
-                        $('.colors .car_m').removeClass('active');
-                        $(this).find('.bright').addClass('active');
+                    $('.car_models .car_m').removeClass('active');
+                    $('.car_models .car_m.bright').eq(0).addClass('active');
+                    $('.car_submodels .car_m.bright').eq(0).addClass('active');
+                    $('.car_colors .car_m.bright').eq(0).addClass('active');
 
-                        console.log('jopa');
-                    })
+
                 },1000)
 
                 inPage('big_slider', galleryBev);
@@ -307,9 +313,14 @@ $('.filter_lvl .car_m').click(function(){
 })
 
 
-// $('.car_models .car_m[data-count="1"]').trigger('click');
-// $('.car_submodels .car_m[data-count="1"]').trigger('click');
-// $('.colors .car_m[data-count="1"]').trigger('click');
+setTimeout(() => {
+    $('.car_m').removeClass('active');
+    $('.car_colors .car_m.bright').eq(0).trigger('click');
+}, 1000);
+
+
+
+
 
     
 if( $(window).width() < 960 ) {
