@@ -200,6 +200,9 @@ $('.filtered_carousel').slick(filtered_car_par);
 
 
 $('.filter_lvl .car_m').click(function(){
+
+    console.log('test');
+
     $(this).parent().find('.car_m').removeClass('active');
     $(this).addClass('active bright');
 
@@ -272,20 +275,28 @@ $('.filter_lvl .car_m').click(function(){
                 $('.big_slider').html( data['bottom_gal'] );
 
 
-                // setTimeout(function(){
-                    $('.car_models').each(function(i){
+                setTimeout(function(){
+
+                    console.log('jopa');
+
+                    
+                    $('.car_models .car_m').each(function(i){
+
                         $('.car_models .car_m').removeClass('active');
-                        $(this).find('.bright').eq(0).addClass('active');
+                        $(this).find('.bright').addClass('active');
+                        
                     })
-                    $('.car_submodels').each(function(i){
+                    $('.car_submodels .car_m').each(function(i){
                         $('.car_submodels .car_m').removeClass('active');
-                        $(this).find('.bright').eq(0).addClass('active');
+                        $(this).find('.bright').addClass('active');
                     })
-                    $('.colors').each(function(i){
+                    $('.colors .car_m').each(function(i){
                         $('.colors .car_m').removeClass('active');
-                        $(this).find('.bright').eq(0).addClass('active');
+                        $(this).find('.bright').addClass('active');
+
+                        console.log('jopa');
                     })
-                // },1000)
+                },1000)
 
                 inPage('big_slider', galleryBev);
 
@@ -296,10 +307,9 @@ $('.filter_lvl .car_m').click(function(){
 })
 
 
-$('.car_models .car_m[data-count="1"]').trigger('click');
-$('.car_submodels .car_m[data-count="1"]').trigger('click');
-$('.colors .car_m[data-count="1"]').trigger('click');
-
+// $('.car_models .car_m[data-count="1"]').trigger('click');
+// $('.car_submodels .car_m[data-count="1"]').trigger('click');
+// $('.colors .car_m[data-count="1"]').trigger('click');
 
     
 if( $(window).width() < 960 ) {

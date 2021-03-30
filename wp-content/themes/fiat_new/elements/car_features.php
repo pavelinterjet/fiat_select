@@ -12,7 +12,6 @@ if( $args ) {
     }
 
 
-
 ?>
     <div class="filtered_carousel" data-pd='<?php ?>'>
         <?php 
@@ -48,7 +47,6 @@ if( $args ) {
                 </li>
                 <?php }
             } ?>
-
             </ul>
         </div>
     </div>
