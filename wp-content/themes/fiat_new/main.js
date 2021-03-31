@@ -209,7 +209,7 @@ if( $(window).width() < 960 ) {
             
         ]
     });
-
+ 
 
     $('.car_colors>div').slick({
         infinite: false,
