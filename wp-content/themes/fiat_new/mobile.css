@@ -134,6 +134,9 @@
 
 
 
-    
+    .car_submodels,
+    .car_colors {
+        direction: ltr;
+    }
 
 }

@@ -197,6 +197,68 @@ $('.filtered_carousel').slick(filtered_car_par);
 
 
 
+    
+if( $(window).width() < 960 ) {
+    $('.car_submodels>div').slick({
+        infinite: false,
+        slidesToScroll: 1,
+        slidesToShow: 1,
+        speed: 500,
+        arrows: false,
+        rtl: false,
+        responsive: [
+            {
+                breakpoint: 500,
+                settings: {
+                    swipe: true,
+                    slidesToShow: 3,
+                }
+            },
+            
+        ]
+    });
+
+
+    $('.car_colors>div').slick({
+        infinite: false,
+        slidesToScroll: 1,
+        slidesToShow: 4,
+        speed: 500,
+        arrows: false,
+        rtl: false,
+        centerMode: false,
+        infinite: false,
+        responsive: [
+            {
+                breakpoint: 500,
+                settings: {
+                    swipe: true,
+                    slidesToShow: 4,
+                }
+            },
+            
+        ]
+    });
+
+
+    
+
+    
+    setTimeout(function() {
+        var $slide = $(".car_submodels .slick-slider .active");
+        var slideIndex = $slide.attr("data-slick-index");
+        $(".car_submodels .slick-slider").slick("slickGoTo", slideIndex   );
+
+        var $slide_colors = $(".car_colors .slick-slider .active");
+        var slideIndex_colors = $slide_colors.attr("data-slick-index");
+        $(".car_colors .slick-slider").slick("slickGoTo", slideIndex_colors   );
+    }, 3000);
+
+
+}
+
+
+
 
 
 $('.filter_lvl .car_m').click(function(){
@@ -236,15 +298,10 @@ $('.filter_lvl .car_m').click(function(){
         },
         success: function(data, textStatus, jqXHR){
 
-
-
             $('.preloader').fadeOut();
             $('.left,.big_slider').removeClass('loading');
-
             $('.car_m').removeClass('bright');
-
                 $(that).addClass('bright');
-
                 var av = data['available'];
                 if( typeof av['model'] != 'undefined' ) {
                     for (let i = 0; i < av['model'].length; i++) {
@@ -261,56 +318,50 @@ $('.filter_lvl .car_m').click(function(){
                         $('.car_m[data-filter_type="submodel"][data-filter="filter_'+av['submodel'][i][0]+'"]').addClass('bright');
                     }
                 }
-                
+
             if( data['content'].length > 0 ) {
                 $('.car_filter .left').html( data['content'] );
-
                 let bt = $('.blue_title').clone();
                 let cf = $('.car_features').clone();
                 let sl = $('.secret_link a').clone()
-
                 $('.mobile_filter_content').html('');
                 $('.mobile_filter_content').append( bt[0] );
                 $('.mobile_filter_content').append( cf[0] );
                 $('.big_button').html( sl[0] );
-
                 $('.filtered_carousel').slick(filtered_car_par);
                 $('.big_slider').html('');
                 $('.big_slider').slick('unslick');
                 $('.big_slider').html( data['bottom_gal'] );
-
-
                 setTimeout(function(){
-
-                    // $('.car_models .car_m.bright').each(function(i){
-                    //     $('.car_models .car_m').removeClass('active');
-                    //     $(this).addClass('active');
-                    // })
-                    // $('.car_submodels .car_m.bright:last-of-type').each(function(i){
-                    //     $('.car_submodels .car_m').removeClass('active');
-                    //     $(this).addClass('active');
-                    // })
-                    // $('.car_colors .car_m.bright:last-of-type').each(function(i){
-                    //     $('.car_colors .car_m').removeClass('active');
-                    //     $(this).addClass('active');
-                    // })
-
-
-                    $('.car_models .car_m').removeClass('active');
+                    $('.car_m').removeClass('active');
                     $('.car_models .car_m.bright').eq(0).addClass('active');
                     $('.car_submodels .car_m.bright').eq(0).addClass('active');
                     $('.car_colors .car_m.bright').eq(0).addClass('active');
-
-
-                },1000)
-
+                },500)
                 inPage('big_slider', galleryBev);
-
             }
+
+            
+            setTimeout(function() {
+                var $slide = $(".car_submodels .slick-slider .bright.active");
+                var slideIndex = $slide.index();
+                $(".car_submodels .slick-slider").slick("slickGoTo", slideIndex-2  );
+                var $slide_colors = $(".car_colors .slick-slider .active");
+                var slideIndex_colors = $slide_colors.index();
+                $(".car_colors .slick-slider").slick("slickGoTo", slideIndex_colors  );
+            }, 2000 );
+
         }
     })
 
+
+        
+ 
+
 })
+
+
+
 
 
 setTimeout(() => {
@@ -321,28 +372,6 @@ setTimeout(() => {
 
 
 
-
-    
-if( $(window).width() < 960 ) {
-    $('.filter_lvl>div').slick({
-        infinite: false,
-        slidesToScroll: 1,
-        slidesToShow: 3,
-        speed: 500,
-        arrows: false,
-        rtl: true,
-        responsive: [
-            {
-                breakpoint: 500,
-                settings: {
-                    swipe: true,
-                    slidesToShow: 2,
-                }
-            },
-            
-        ]
-    });
-}
 
     
 $("a").on('click', function(event) {

@@ -1,19 +1,14 @@
 <?php 
-
 if( $args ) {
     $pid = $args[0]->ID; 
     $img_gal = get_field('left_gallery' , $pid);
-
-
     if ( $img_gal ) {
         $features = $img_gal[0]['features'];
     } else {
         $features = NULL;
     }
-
-
 ?>
-    <div class="filtered_carousel" data-pd='<?php ?>'>
+    <div class="filtered_carousel" data-pd='<?php echo $pid; ?>'>
         <?php 
 
         if( $img_gal && $img_gal[0]['images']){
