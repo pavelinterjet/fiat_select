@@ -37,7 +37,7 @@ jobs:
           FTP_USERNAME: server@interjet.co.il
           FTP_PASSWORD: ${{ secrets.FTP_DEPLOY }}
           REMOTE_DIR: '/public_html/demos/smlt/fiat-from-git'
-          ARGS: --delete --dry-run
+          ARGS: --delete
 #         run: |
 #           echo Add other actions to build,
 #           echo test, and deploy your project.
