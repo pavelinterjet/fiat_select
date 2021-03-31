@@ -51,7 +51,9 @@
         margin-bottom: 50px;
     }
 
-
+    .car_filter .car_m:last-of-type {
+        margin-left: auto;
+    }
 
     .car_models::before, .car_models::after {
         content: '';

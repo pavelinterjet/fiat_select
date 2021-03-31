@@ -115,12 +115,9 @@ img {
 .flex_no_wrap__d {
 	flex-wrap:nowrap;
 }
-
-
 .flex_reverse_col {
     flex-direction: column-reverse;
 }
-
 .flex_reverse_row {
     flex-direction: row-reverse;
 }
@@ -267,7 +264,7 @@ section.car_filter {
 }
 .car_filter .right {
     max-width: 430px;
-    width: 30%;
+    width: 40%;
     position: relative;
 }
 .preloader {
@@ -291,8 +288,13 @@ section.car_filter {
     cursor: pointer;
     transition: border-bottom 0.2s ease-in-out;
     opacity: 0.5;
-    /* pointer-events: none; */
+    margin-left: 5px;
 }
+
+.car_filter .car_m:last-of-type {
+    margin-left: 0;
+}
+
 .car_filter .car_m.bright {
     opacity: 1;
     /* pointer-events: all; */
@@ -330,7 +332,7 @@ section.car_filter {
 }
 
 .car_filter .left {
-    width: 60%;
+    width: 55%;
     max-width: 810px;
     margin-top: -120px;
     transition: opacity 0.3s ease-in-out;

@@ -162,7 +162,7 @@ $gals = new WP_Query($args);
                     </div>
 
                     <div class="car_submodels filter_lvl">
-                            <div class="flex_container flex__space_between ">
+                            <div class="flex_container flex__space_between flex_no_wrap__d">
                                 <?php $s_mcc = 0; 
                                 while ($sub_m_q->have_posts()) {
                                     $sub_m_q->the_post();

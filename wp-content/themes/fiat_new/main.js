@@ -188,21 +188,13 @@ var filtered_car_par = {
         cssEase: 'ease-in-out',
         touchThreshold: 100,
         draggable: true };
-
-
 $('.filtered_carousel').slick(filtered_car_par);
 
-
-
-
-
-
-    
 if( $(window).width() < 960 ) {
     $('.car_submodels>div').slick({
         infinite: false,
         slidesToScroll: 1,
-        slidesToShow: 1,
+        slidesToShow: 3,
         speed: 500,
         arrows: false,
         rtl: false,
@@ -341,7 +333,7 @@ $('.filter_lvl .car_m').click(function(){
                 inPage('big_slider', galleryBev);
             }
 
-            
+
             setTimeout(function() {
                 var $slide = $(".car_submodels .slick-slider .bright.active");
                 var slideIndex = $slide.index();
