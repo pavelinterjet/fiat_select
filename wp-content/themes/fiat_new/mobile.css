@@ -133,12 +133,20 @@
 
 @media all and (max-width: 768px) {
 
-
-
-
+    .big_button {
+        position: fixed;
+        width: 90%;
+        bottom: 20px;
+        margin: 0;
+        z-index: 999;
+        right: 5%;
+    }
     .car_submodels,
     .car_colors {
         direction: ltr;
+    }
+    .head-strip {
+        height: 90px;
     }
 
 }

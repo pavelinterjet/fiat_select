@@ -154,13 +154,9 @@ $gals = new WP_Query($args);
                                 ];
                                 echo get_template_part('elements/car_model', 'car_model' , $level_one_args );
                             } wp_reset_postdata();
-                            
                             ?>
-
-                            <?php  ?>
                         </div>
                     </div>
-
                     <div class="car_submodels filter_lvl">
                             <div class="flex_container flex__space_between flex_no_wrap__d">
                                 <?php $s_mcc = 0; 

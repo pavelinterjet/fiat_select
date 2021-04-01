@@ -138,13 +138,12 @@ img {
 .flex__space_between {
     justify-content: space-between;
 }
-
-
-
 .flex__space_around {
     justify-content: space-around;
 }
-
+.flex__space_center {
+    justify-content: center;
+}
 
 
 
@@ -229,6 +228,41 @@ header {
 
 .filtered_carousel {
     direction: ltr;
+    position: relative;
+}
+.filtered_carousel .slick-arrow {
+    position: absolute;
+    top: 40%;
+    cursor: pointer;
+    z-index: 9;
+    transition: transform 0.3s ease-in-out;
+}
+
+.filtered_carousel .slick-arrow:hover {
+    transform: scale(1.105);
+}
+
+.filtered_carousel .slick-arrow.prev::after {
+    content: '‹';
+    display: block;
+    font-size: 90px;
+    font-weight: 100;
+    font-family: times new roman;
+    color: #00c0d7;
+}
+.filtered_carousel .slick-arrow.next::after  {
+    content: '›';
+    display: block;
+    font-size: 90px;
+    font-weight: 100;
+    font-family: times new roman;
+    color: #00c0d7;
+}
+.filtered_carousel .slick-arrow.prev {
+    left: 20px;
+}
+.filtered_carousel .slick-arrow.next {
+    right: 20px;
 }
 
 section {
@@ -373,6 +407,7 @@ section.car_filter {
 
 .car_features li span {
     display: block;
+    margin-bottom: 5px;
 }
 
 .big_slider {
