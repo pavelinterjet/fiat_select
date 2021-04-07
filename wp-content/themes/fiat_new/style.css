@@ -225,9 +225,11 @@ header {
     margin-bottom: auto;
 }
 
-
+.slick-slide img {
+    margin: 0 auto;
+}
 .filtered_carousel {
-    direction: ltr;
+    /* direction: ltr; */
     position: relative;
 }
 .filtered_carousel .slick-arrow {
@@ -243,7 +245,7 @@ header {
 }
 
 .filtered_carousel .slick-arrow.prev::after {
-    content: '‹';
+    content: '›';
     display: block;
     font-size: 90px;
     font-weight: 100;
@@ -251,7 +253,7 @@ header {
     color: #00c0d7;
 }
 .filtered_carousel .slick-arrow.next::after  {
-    content: '›';
+    content: '‹';
     display: block;
     font-size: 90px;
     font-weight: 100;
@@ -301,6 +303,14 @@ section.car_filter {
     width: 40%;
     position: relative;
 }
+
+
+.car_submodels .car_m .thumb {
+    max-width: 96px;
+    margin: 0 auto;
+    width: 86%;
+}
+
 .preloader {
     position: absolute;
     z-index: 9;
@@ -346,7 +356,7 @@ section.car_filter {
 
 .filter_lvl {
     border-bottom: 1px solid #E0E0E0;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
 }
 .filter_lvl .active,
 .filter_lvl .car_m:hover
@@ -360,9 +370,6 @@ section.car_filter {
 .car_colors .car_m .thumb {
     max-width: 35px;
     margin: 0 auto;
-    border: 1px solid;
-    border-radius: 50%;
-    padding: 4px;
 }
 
 .car_filter .left {
@@ -411,8 +418,7 @@ section.car_filter {
 }
 
 .big_slider {
-    direction: ltr;
-    padding-bottom: 40px;
+    padding-bottom: 130px;
     transition: opacity 0.3s ease-in-out;
     -webkit-transition: opacity 0.3s ease-in-out;
     -moz-transition: opacity 0.3s ease-in-out;

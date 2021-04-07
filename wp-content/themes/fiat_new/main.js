@@ -56,7 +56,7 @@ const galleryBev = function ($list) {
       $carousel.slick({
           infinite: false,
           swipe: true,
-          rtl: false,
+          rtl: true,
           dots: true,
           arrows: false,
           variableWidth: true,
@@ -177,7 +177,7 @@ $(function () {
 
 
 var filtered_car_par = {
-        rtl: false,
+        rtl: true,
         autoplay: true,
         autoplaySpeed: 2000,
         slidesToShow: 1,
@@ -192,7 +192,16 @@ var filtered_car_par = {
         speed: 500,
         cssEase: 'ease-in-out',
         touchThreshold: 100,
-        draggable: true };
+        draggable: true,
+        responsive: [
+            {
+                breakpoint: 768,
+                settings: {
+                    arrows: false
+                }
+            },
+        ]
+    };
 $('.filtered_carousel').slick(filtered_car_par);
 
 if( $(window).width() < 960 ) {

@@ -8,7 +8,7 @@ if( $args ) {
         $features = NULL;
     }
 ?>
-    <div class="filtered_carousel" data-pd='<?php echo $pid; ?>'>
+    <div class="filtered_carousel" data-pd='<?php echo $pid; ?>' dir='rtl'>
         <?php 
             if( $img_gal && $img_gal[0]['images']){
             foreach( $img_gal[0]['images'] as $ig ) { ?>

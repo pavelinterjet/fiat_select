@@ -220,7 +220,7 @@ $gals = new WP_Query($args);
         </ul>
     </div> -->
 
-    <section class="big_slider">
+    <section class="big_slider" dir='rtl'>
         <?php 
             echo get_template_part('elements/slide' , 'slide' , ['field' => get_field('bottom_gallery', 10)] );
         ?>
