@@ -1,32 +1,17 @@
-<?php
-
-
-
-// $plaintext = "message to be encrypted";
-// $cipher = "aes-128-gcm";
-// if (in_array($cipher, openssl_get_cipher_methods()))
-// {
-//     $ivlen = openssl_cipher_iv_length($cipher);
-//     $iv = openssl_random_pseudo_bytes($ivlen);
-//     $ciphertext = openssl_encrypt($plaintext, $cipher, $key, $options=0, $iv, $tag);
-//     //store $cipher, $iv, and $tag for decryption later
-//     $original_plaintext = openssl_decrypt($ciphertext, $cipher, $key, $options=0, $iv, $tag);
-//     echo $ciphertext."\n";
-// }
-
-
-
-
-$templ_path = get_stylesheet_directory_uri(); 
+<?php 
+/*
+* Template Name: Home
+*/
 
 
 if( isAjax() ) {
-    
 
-    $car_model = '';
-    $submodels = '';
-    $car_colors = '';
+
+    // print_r( $_POST );
+
+
     $available = [];
+
 
     if( isset( $_POST['car_models'] ) ) {
         $car_model = str_replace('filter_' , '' , $_POST['car_models']);
@@ -38,68 +23,145 @@ if( isAjax() ) {
         $car_colors = str_replace('filter_' , '' , $_POST['car_colors']);
     }
 
+    if( isset( $_POST['filter_type'] ) ) {
+        $filter_type = $_POST['filter_type'];
+    }
+    if( isset( $_POST['current_filter'] ) ) {
+        $current_filter = str_replace('filter_' , '' , $_POST['current_filter'] );
+    }
 
-    $sub_models_in = get_submodels( $car_model );
-    $colors_in = get_colors( $submodels,$car_model ); 
-
-    // print_r($colors_in);
-    
-    $argz = [
+    $args = [
         'post_type' => 'car_gallery',
+        'posts_per_page' => -1,
         'meta_query' => [
-            'relation' => 'AND',
-            [
-                'key' => 'model_filter',
-                'value' => '"'.$car_model.'"',
-                'compare' => 'LIKE'
-            ]
+
         ]
     ];
+    $args['meta_query']['relation'] = 'AND';
 
 
-    // print_r($sub_models_in);
-    // [
-    //     'key' => 'submodel_filter',
-    //     'value' => '"'.$sub_models_in.'"',
-    //     'compare' => 'LIKE'
-    // ]
-    // $sub_models_in
+    if ( $filter_type == 'model' ) {
+        
+        $submodels = array_unique( get_submodels( $car_model ) );
 
 
-    foreach( $sub_models_in as $sub_col ) {
-        $argz['meta_query'][] = 
-        [
+        if( !isset( $submodels[0] ) ) {
+            exit; 
+        }
+        $colors = get_colors(  $submodels[0],$car_model  );
+
+        // foreach ($submodels[0] as $submodel) {
+            $args['meta_query'][] = [
+                'key' => 'submodel_filter',
+                'value' => '"' .$submodels[0]. '"',
+                'compare' => 'LIKE'
+            ];
+        // }
+
+        // foreach ($colors as $color) {
+            $args['meta_query'][] = [
+                'key' => 'colors_filter',
+                'value' => '"' .$colors[0]. '"',
+                'compare' => 'LIKE'
+            ];
+        // }
+
+
+
+
+
+    } else if( $filter_type == 'submodel' ) {
+
+
+        $submodels = array_unique( get_submodels( $car_model ) );
+        $colors = get_colors(  $current_filter,$car_model  );
+
+
+        // print_r($current_filter);
+        // print_r($car_model);
+        // print_r($colors);
+
+        $args['meta_query'][] = [
+            'key' => 'model_filter',
+            'value' => '"' .$car_model. '"',
+            'compare' => 'LIKE'
+        ];
+
+        $args['meta_query'][] = [
             'key' => 'submodel_filter',
-            'value' => '"'.$sub_col.'"',
+            'value' => '"' .$current_filter. '"',
             'compare' => 'LIKE'
         ];
-    }
+    // }
 
-
-    foreach( $colors_in as $s_col ) {
-        $argz['meta_query'][] = 
-        [
+    // foreach ($colors as $color) {
+        $args['meta_query'][] = [
             'key' => 'colors_filter',
-            'value' => '"'.$s_col.'"',
+            'value' => '"' .$colors[0]. '"',
             'compare' => 'LIKE'
         ];
+
+
+
+    } else if( $filter_type == 'colors' ) {
+
+        $submodels = array_unique( get_submodels( $car_model ) );
+        $colors = get_colors(  $submodels,$car_model  );
+
+        $args['meta_query'][] = [
+            'key' => 'model_filter',
+            'value' => '"' .$car_model. '"',
+            'compare' => 'LIKE'
+        ];
+        $args['meta_query'][] = [
+            'key' => 'submodel_filter',
+            'value' => '"' .$submodels. '"',
+            'compare' => 'LIKE'
+        ];
+        $args['meta_query'][] = [
+            'key' => 'colors_filter',
+            'value' => '"' .$current_filter. '"',
+            'compare' => 'LIKE'
+        ];
+        
     }
-    
-
-    // print_r($argz);
-
-    $available['colors'] = $colors_in;
-    $available['submodels'] = $sub_models_in;
-
-    // print_r($_POST);
-    // print_r($argz);
-
-    $galz = new WP_Query($argz);
 
 
-    // print_r( $galz->posts );
+    // print_r( $colors );
 
-    
+   
+    if ( isset( $colors ) ) {
+
+        if ( is_array( $colors ) ) {
+            $available['colors'] = $colors;
+            // $available['sub_models'] = $submodels;
+        } else {
+            $available['colors'] = [$colors];
+        }
+
+    }
+
+
+    if( isset( $submodels ) ) {
+
+        if ( is_array($submodels)  ) {
+            // $available['colors'] = $colors;
+            $available['sub_models'] = $submodels;
+        } else {
+            $available['sub_models'] = [$submodels];
+        }
+        
+    } 
+
+
+    // print_r($available);
+    // print_r($args);
+    $galz = new WP_Query($args);
+    // print_r($galz->posts);
+
+
+
+
     if( $galz->post_count > 0 ) {
         ob_start();
         get_template_part('elements/car_features' , 'car_features' , $galz->posts);
@@ -111,69 +173,49 @@ if( isAjax() ) {
         $bottom_gal = ob_get_contents();
         ob_end_clean();
     }
-    echo json_encode( ['content' => $clean??'', 'bottom_gal' => $bottom_gal??'', 'available' =>  $available ] , true );
-
-    die();
-} else {
+    echo json_encode( ['content' => $clean??'', 'bottom_gal' => $bottom_gal??'', 'available' => $available ] , true );
 
 
-    $available_models = get_available_models();
-    $sub_models = get_submodels( $available_models[0] );
-    $colors = get_colors( $sub_models[0],$available_models[0] ); 
 
-    
+
+die;
 }
 
 
 
-$m_args = [
+$args_models = [
     'post_type' => 'models',
-    'posts_per_page' => -1,
+    'posts_per_page' => -1
 ];
-$m_q = new WP_Query($m_args);
-$subm_args = [
+$models = new WP_Query($args_models);
+
+
+
+
+$args_sub = [
     'post_type' => 'sub-models',
     'posts_per_page' => -1
 ];
-$sub_m_q = new WP_Query($subm_args);
+$sub_m_q = new WP_Query($args_sub);
 
-$color_args = [
+
+
+$args_colors = [
     'post_type' => 'colors',
     'posts_per_page' => -1
 ];
-
-$color_q = new WP_Query($color_args);
-
-$args = [
-    'post_type' => 'car_gallery',
-    'meta_query' => [
-        'relation' => 'AND',
-        [
-            'key' => 'model_filter',
-            'value' => '"'.$available_models[0].'"',
-            'compare' => 'LIKE'
-        ],
-        [
-            'key' => 'submodel_filter',
-            'value' => '"'.$sub_models[0].'"',
-            'compare' => 'LIKE'
-        ],
-        [
-            'key' => 'colors_filter',
-            'value' => '"'.$colors[0].'"',
-            'compare' => 'LIKE'
-        ],
-    ]
-];
+$color_q = new WP_Query($args_colors);
 
 
-$gals = new WP_Query($args);
+
+get_header();
 
 
 
 ?>
 
-<?php get_header(); ?>
+
+
 
 
 <section class="wrapper">
@@ -192,7 +234,7 @@ $gals = new WP_Query($args);
 
 
                 <?php
-                    get_template_part('elements/car_features' , 'car_features' , $gals->posts);                    
+                    // get_template_part('elements/car_features' , 'car_features' , $gals->posts);                    
                 ?>
 
 
@@ -204,14 +246,14 @@ $gals = new WP_Query($args);
                     <div class="car_models filter_lvl">
                         <div class="flex_container flex__space_between">
                             <?php $mcc = 0; 
-                            while ($m_q->have_posts()) {
-                                $m_q->the_post();
+                            while ($models->have_posts()) {
+                                $models->the_post();
                                 $mcc++;
                                 $level_one_args = [
                                     'counter'   => $mcc,
-                                    'max'       => $m_q->post_count,
+                                    'max'       => $models->post_count,
                                     'p_id'      => get_the_ID(),
-                                    'available' => $available_models
+                                    // 'available' => $available_models
                                 ];
                                 echo get_template_part('elements/car_model', 'car_model' , $level_one_args );
                             } wp_reset_postdata();
@@ -228,7 +270,7 @@ $gals = new WP_Query($args);
                                         'counter'   => $s_mcc,
                                         'max'       => $sub_m_q->post_count,
                                         'sp_id'     => get_the_ID(),
-                                        'available' => $sub_models
+                                        // 'available' => $sub_models
                                     ];
                                     echo get_template_part('elements/car_submodel', 'car_submodel' , $level_two_args );
                                 } wp_reset_postdata(); ?>
@@ -245,7 +287,7 @@ $gals = new WP_Query($args);
                                         'counter' => $colorcc,
                                         'max'     => $color_q->post_count,
                                         'sp_id'    => get_the_ID(),
-                                        'available' => $colors
+                                        // 'available' => $colors
                                     ];
                                     echo get_template_part('elements/car_colors', 'car_colors' , $level_three_args );
                             } wp_reset_postdata(); ?>
@@ -283,7 +325,7 @@ $gals = new WP_Query($args);
 
     <section class="big_slider" dir='rtl'>
         <?php 
-            get_template_part('elements/slide' , 'slide' , ['field' => get_field('bottom_gallery', $gals->posts[0]->ID ) ] );
+            // get_template_part('elements/slide' , 'slide' , ['field' => get_field('bottom_gallery', $gals->posts[0]->ID ) ] );
         ?>
     </section>
 
@@ -293,37 +335,3 @@ $gals = new WP_Query($args);
 
 
 <?php get_footer(); ?>
-
-
-
-
-
-<?php
-
-
-
-// header('Content-Type:application/json');
-// $url = "http://interjet.co.il/demos/smlt/new_fiat/";
-
-// $ch = curl_init();
-// curl_setopt($ch, CURLOPT_URL, $url);
-// curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-// curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-
-// $res = curl_exec($ch);
-
-// curl_close($ch);
-
-
-
-// $dom = new DomDocument();
-// @ $dom->loadHTML($res);
-
-// print_r($dom);
-
-// $table = $dom->getElementById('tablepress-3'); //DOMElement
-// $child_elements = $table->getElementsByTagName('tr'); //DOMNodeList
-// $row_count = $child_elements->length - 1;
-
-
-?>

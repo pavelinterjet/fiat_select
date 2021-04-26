@@ -1,0 +1,121 @@
+[33mcommit 2fde7a677682d608e8085a613d76d221c7d43024[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: Pavel <pavel@interjet.co.il>
+Date:   Wed Apr 7 12:09:13 2021 +0300
+
+    qa fixs
+
+[33mcommit 79c0c7db9cee3c9479ffb0c162ac681370bf23e7[m
+Author: Pavel <pavel@interjet.co.il>
+Date:   Thu Apr 1 14:24:52 2021 +0300
+
+    ...
+
+[33mcommit 029fb4a800e8078fb052f20dd48396da8b2edda2[m
+Merge: 45aed38 dd7ae0c
+Author: Pavel <pavel@interjet.co.il>
+Date:   Wed Mar 31 12:46:35 2021 +0300
+
+    Merge branch 'main' of https://github.com/pavelinterjet/fiat_select
+
+[33mcommit 45aed385e9fec72edaac0bc8026a66bfc5489c5b[m
+Author: Pavel <pavel@interjet.co.il>
+Date:   Wed Mar 31 12:46:21 2021 +0300
+
+    test
+
+[33mcommit dd7ae0cab5a1e0d1918aed29c2dde1332d8ba185[m
+Author: pavelinterjet <79507961+pavelinterjet@users.noreply.github.com>
+Date:   Wed Mar 31 11:30:58 2021 +0300
+
+    Update main.yml
+
+[33mcommit 658502a5811260173b06d90f480c75b6637ce320[m
+Merge: c6614ba affabf5
+Author: Pavel <pavel@interjet.co.il>
+Date:   Wed Mar 31 11:29:05 2021 +0300
+
+    Merge branch 'main' of https://github.com/pavelinterjet/fiat_select
+
+[33mcommit c6614baae33bc2156fba95fe978e7fb81255c37e[m
+Author: Pavel <pavel@interjet.co.il>
+Date:   Wed Mar 31 11:28:44 2021 +0300
+
+    ...
+
+[33mcommit affabf5b13b01039817f8963ce59622371950b09[m
+Author: pavelinterjet <79507961+pavelinterjet@users.noreply.github.com>
+Date:   Wed Mar 31 11:27:41 2021 +0300
+
+    Create main.yml
+
+[33mcommit e530de8dd33379768b8f51f5e87f348c0a5ffd94[m
+Author: Pavel <pavel@interjet.co.il>
+Date:   Wed Mar 31 11:07:59 2021 +0300
+
+    ...
+
+[33mcommit 2ec7a027b69460ed650484346b2e59b2df4df2ef[m
+Author: Pavel <pavel@interjet.co.il>
+Date:   Wed Mar 31 10:53:51 2021 +0300
+
+    ...
+
+[33mcommit 22b751b7f19ab80bf5e6868814174cd6fd1f64ff[m
+Author: Pavel <pavel@interjet.co.il>
+Date:   Tue Mar 30 17:32:55 2021 +0300
+
+    ...
+
+[33mcommit 649752956e3bbbc3b4f908510de15d545f00b5ed[m
+Author: Pavel <pavel@interjet.co.il>
+Date:   Tue Mar 30 14:31:05 2021 +0300
+
+    .,.
+
+[33mcommit 401104434c33ba8ba3bb9c337f413eabf1933ffe[m
+Author: Pavel <pavel@interjet.co.il>
+Date:   Mon Mar 29 17:46:03 2021 +0300
+
+    ...
+
+[33mcommit 412a67335646b4dd32636313f264551b21034ced[m
+Author: Pavel <pavel@interjet.co.il>
+Date:   Mon Mar 22 12:05:13 2021 +0200
+
+    db backup
+
+[33mcommit 9780b807b1db3d43cf1bdc7e679d86808afa1197[m
+Author: Pavel <pavel@interjet.co.il>
+Date:   Mon Mar 22 12:02:24 2021 +0200
+
+    finished
+
+[33mcommit 0958f4874f253ca5b242081ae26ea5871233fc5b[m
+Author: Pavel <pavel@interjet.co.il>
+Date:   Mon Mar 22 11:53:32 2021 +0200
+
+    finished
+
+[33mcommit 8e476a0b22eff47c86e92499f21dcd1760eb9205[m
+Author: Pavel <pavel@interjet.co.il>
+Date:   Wed Mar 17 09:48:38 2021 +0200
+
+    ...
+
+[33mcommit ee2a5dd388de0955b6e4307e7c3fd44056e8d89a[m
+Author: Pavel <pavel@interjet.co.il>
+Date:   Tue Mar 16 16:11:50 2021 +0200
+
+    done front
+
+[33mcommit 30c9d92a474422b8c8a5fcb2070327042847935d[m
+Author: Pavel <pavel@interjet.co.il>
+Date:   Tue Mar 16 16:02:07 2021 +0200
+
+    2nd commit
+
+[33mcommit 887dc5694d6790b24e88cd94ef739907797bbc8c[m
+Author: pavelinterjet <79507961+pavelinterjet@users.noreply.github.com>
+Date:   Tue Mar 16 15:41:33 2021 +0200
+
+    Initial commit

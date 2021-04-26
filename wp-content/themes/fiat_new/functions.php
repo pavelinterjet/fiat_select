@@ -127,6 +127,9 @@ function fiat_post_types() {
 }
 add_action( 'init', 'fiat_post_types' );
 
+
+
+
 function get_available_models() {
     $args_gal = [
         'post_type' => 'car_gallery',
@@ -152,151 +155,82 @@ function get_available_models() {
 }
 
 
-function get_available_submodels($field,$ids) {
 
 
 
+function get_submodels( $model_id ) {
 
-    $meta_query['relation'] = 'OR';
-    foreach ( array_unique($ids) as $id ) {
-
-        $meta_query[] = [
-
-            [
-                'key' => 'model_filter',
-                'value' => '"'.$id.'"',
-                'compare' => 'LIKE'
-            ]
-
-        ];
-
-    }
-
- 
-    $argz = [
-        'posts_per_page' => -1,
+    $args = [
         'post_type' => 'car_gallery',
         'fields'    => 'ids',
-        // 'meta_query' => $meta_query
-    ];
-
-    $galz = new WP_Query($argz);
-
-
-    // print_r($galz->posts);
-
-    $availabel_submodels = [];
-    while ( $galz->have_posts() ) { $galz->the_post();
-
-
-        if( get_field( 'model_filter' , get_the_ID() ) ) {
-            $availabel_submodels[] = get_field('submodel_filter' , get_the_ID());
-        }
-
-
-    } wp_reset_postdata();
-
-
-    if( $availabel_submodels && is_array( $availabel_submodels ) ) {
-        $flat = call_user_func_array('array_merge', $availabel_submodels);
-    }
-
-    // print_r( array_unique($flat) );
-
-    return  array_unique($flat);
-}
-
-
-
-function get_available_colors($field,$ids) {
-
-    $meta_query['relation'] = 'OR';
-
-    foreach (array_unique($ids) as $id) {
-        $meta_query[] = [
-            [
-                'key' => $field.'_filter',
-                'value' => '"'.$id.'"',
-                'compare' => 'LIKE'
-            ]
-        ];
-    }
-    $argz = [
-        'posts_per_page' => -1,
-        'post_type' => 'car_gallery',
-        // 'meta_query' => $meta_query
-    ];
-
-    $galz = new WP_Query($argz);
-    $availabel_colors = [];
-    while ( $galz->have_posts() ) { $galz->the_post();
-        if( get_field( 'model_filter' , get_the_ID() ) ) {
-            $availabel_colors[] = get_field('colors_filter' , get_the_ID());
-        }
-    } wp_reset_postdata();
-    if( $availabel_colors && is_array( $availabel_colors ) ) {
-        $flat = call_user_func_array('array_merge', $availabel_colors);
-    }
-
-    return  array_unique($flat);
-}
-
-
-
-
-function check_availability($filter,  $id) {
-
-    $argz = [
-        'post_type' => 'car_gallery',
-        'posts_per_page' => -1,
         'meta_query' => [
             [
-                'key' => $filter.'_filter',
-                'value' => '"'. $id . '"',
+            'key' => 'model_filter',
+            'value' =>  '"' . $model_id . '"',
+            'compare' => 'LIKE'
+            ]
+        ]
+    ];
+
+    
+    $models_psts = new WP_Query($args);
+
+
+    $sub_models = [];
+    foreach( $models_psts->posts as $models_post ) {
+        $submodel = get_field('submodel_filter' , $models_post );
+    
+        $sub_models[] = $submodel; 
+    }
+    
+    $flat = call_user_func_array('array_merge', $sub_models);
+    return $flat;
+
+}
+
+
+
+function get_colors(  $sub_model,$model  ) {
+
+    // echo 'sub';
+    // echo $sub_model .' <br>';
+    
+    // echo 'mod';
+    // echo $model  .' <br>';
+
+    $args = [
+        'post_type' => 'car_gallery',
+        'fields'    => 'ids',
+        'meta_query' => [
+            'relation' => 'AND',
+            [
+                'key' => 'model_filter',
+                'value' =>  '"' .$model. '"',
+                'compare' => 'LIKE'
+            ],
+            [
+                'key' => 'submodel_filter',
+                'value' =>  '"' .$sub_model. '"',
                 'compare' => 'LIKE'
             ],
         ]
     ];
-    $galz = new WP_Query($argz);
-    $big_arr = [];
-        foreach ($galz->posts as $key => $gal) {
-
-            if( $filter == 'model' ) { 
-                $big_arr['submodel'][$key] = get_field('submodel_filter' , $gal->ID);
-                $big_arr['colors'][$key] = get_field('colors_filter' , $gal->ID);
-            } else if( $filter == 'submodel' ) { 
-                $big_arr['model'][$key] = get_field('model_filter' , $gal->ID);
-                $big_arr['colors'][$key] = get_field('colors_filter' , $gal->ID);
-            } else if( $filter == 'colors'  ) {
-                $big_arr['model'][$key] = get_field('model_filter' , $gal->ID);
-                $big_arr['submodel'][$key] = get_field('submodel_filter' , $gal->ID);
-            } 
+    
+    $colors = new WP_Query($args); 
 
 
-            
+    // print_r($colors->posts);
 
-        }
 
-        $big_arr[$filter][][] = $id; 
+    $colors_arr = [];
+    foreach( $colors->posts as $c_post ) {
+        $colors_arr[] = get_field('colors_filter' , $c_post);
+    }
 
-        
-    return $big_arr;
+
+    $flat = call_user_func_array('array_merge', $colors_arr);
+    return $flat;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

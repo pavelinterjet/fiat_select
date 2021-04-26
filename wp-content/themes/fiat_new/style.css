@@ -333,6 +333,18 @@ section.car_filter {
     transition: border-bottom 0.2s ease-in-out;
     opacity: 0.5;
     margin-left: 5px;
+    /* display: none; */
+}
+
+
+.car_colors .car_m {
+    display: none;
+}
+
+
+.car_colors .car_m.bright {
+    display: block;
+    margin-left: 15px;
 }
 
 .car_filter .car_m:last-of-type {
@@ -342,6 +354,7 @@ section.car_filter {
 .car_filter .car_m.bright {
     opacity: 1;
     /* pointer-events: all; */
+    display: block;
 }
 
 .car_filter .car_m .thumb {
